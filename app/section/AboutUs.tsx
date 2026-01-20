@@ -282,7 +282,7 @@ export default function AboutUs() {
             {/* Main Heading */}
             <h2 
               ref={headingRef}
-              className="text-3xl md:text-4xl lg:text-4xl font-bold leading-tighter tracking-tight mb-4"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tighter tracking-tight mb-4"
             >
               Switch to <span style={{ color: '#09DFAB' }}>Solar</span> & Enjoy Energy Independence
             </h2>

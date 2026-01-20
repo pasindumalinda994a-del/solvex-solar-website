@@ -44,28 +44,23 @@ export default function Footer() {
                   </p>
                   <ul className="space-y-1.5 text-sm md:text-base">
                     <li>
-                      <AnimatedNavLink href="#home" className="text-white/70 hover:text-white transition-colors">
+                      <AnimatedNavLink href="/" className="text-white/70 hover:text-white transition-colors">
                         Home
                       </AnimatedNavLink>
                     </li>
                     <li>
-                      <AnimatedNavLink href="#tours" className="text-white/70 hover:text-white transition-colors">
-                        Tours
+                      <AnimatedNavLink href="/services" className="text-white/70 hover:text-white transition-colors">
+                        Services
                       </AnimatedNavLink>
                     </li>
                     <li>
-                      <AnimatedNavLink href="#about" className="text-white/70 hover:text-white transition-colors">
+                      <AnimatedNavLink href="/about" className="text-white/70 hover:text-white transition-colors">
                         About
                       </AnimatedNavLink>
                     </li>
                     <li>
-                      <AnimatedNavLink href="#blog" className="text-white/70 hover:text-white transition-colors">
+                      <AnimatedNavLink href="/blog" className="text-white/70 hover:text-white transition-colors">
                         Blog
-                      </AnimatedNavLink>
-                    </li>
-                    <li>
-                      <AnimatedNavLink href="#gallery" className="text-white/70 hover:text-white transition-colors">
-                        Gallery
                       </AnimatedNavLink>
                     </li>
                   </ul>
@@ -108,7 +103,7 @@ export default function Footer() {
         <div className="col-span-12 mt-4 flex flex-col gap-3 pt-4 text-xs md:text-sm text-black">
           <div className="flex w-full flex-col gap-3 items-start justify-between md:flex-row md:items-center">
             <p className="tracking-tight">
-              © 2025 Marwa. All rights reserved.
+              © 2025 Solvex. All rights reserved.
             </p>
 
             <div className="flex items-center gap-6 ml-auto">

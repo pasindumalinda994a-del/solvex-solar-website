@@ -23,7 +23,7 @@ export default function Header() {
               <ul className="flex items-center gap-6 lg:gap-8">
                 <li>
                   <AnimatedNavLink 
-                    href="#home" 
+                    href="/" 
                     className="text-sm lg:text-md font-regular text-black hover:text-foreground transition-colors duration-200"
                   >
                     Home
@@ -31,7 +31,7 @@ export default function Header() {
                 </li>
                 <li>
                   <AnimatedNavLink 
-                    href="#services" 
+                    href="/services" 
                     className="text-sm lg:text-md font-regular text-black hover:text-foreground transition-colors duration-200"
                   >
                     Services
@@ -39,7 +39,7 @@ export default function Header() {
                 </li>
                 <li>
                   <AnimatedNavLink 
-                    href="#about" 
+                    href="/about" 
                     className="text-sm lg:text-md font-regular text-black hover:text-foreground transition-colors duration-200"
                   >
                     About
@@ -47,7 +47,7 @@ export default function Header() {
                 </li>
                 <li>
                   <AnimatedNavLink 
-                    href="#blog" 
+                    href="/blog" 
                     className="text-sm lg:text-md font-regular text-black hover:text-foreground transition-colors duration-200"
                   >
                     Blog

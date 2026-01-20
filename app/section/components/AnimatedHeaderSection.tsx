@@ -77,7 +77,7 @@ export default function AnimatedHeaderSection({
       </p>
       <h2
         ref={titleRef}
-        className={`text-4xl lg:text-5xl font-bold mb-6 ${textColor}`}
+        className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-6 ${textColor}`}
       >
         {title}
       </h2>
