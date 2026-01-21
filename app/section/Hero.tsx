@@ -155,6 +155,29 @@ export default function Hero() {
                 </div>
               </div>
             </div>
+            {/* Bottom-right icon strip */}
+            <div className="absolute right-4 bottom-4 md:right-6 md:bottom-6 lg:right-8 lg:bottom-8 flex items-center gap-3 bg-white/40 backdrop-blur-md px-4 py-3 rounded-full">
+              <img
+                src="/icons/eco.svg"
+                alt="Eco friendly"
+                className="w-7 h-7 md:w-6 md:h-6"
+              />
+              <img
+                src="/icons/saving.svg"
+                alt="Energy saving"
+                className="w-7 h-7 md:w-6 md:h-6"
+              />
+              <img
+                src="/icons/expert.svg"
+                alt="Expert installation"
+                className="w-7 h-7 md:w-6 md:h-6"
+              />
+              <img
+                src="/icons/warenty.svg"
+                alt="Warranty"
+                className="w-7 h-7 md:w-6 md:h-6"
+              />
+            </div>
           </div>
         </div>
       </div>
