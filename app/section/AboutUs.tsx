@@ -9,6 +9,25 @@ import StatsAnimation from './components/StatsAnimation';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Content Configuration - Easy to customize
+const aboutUsContent = {
+  tag: 'ABOUT',
+  heading: 'Switch to Solar & Enjoy Energy Independence',
+  headingHighlight: 'Solar',
+  buttonText: 'START A PROJECT',
+  paragraph: 'Reliable solar solutions that cut your bills and reduce your carbon footprint. Reliable solar solutions that cut your bills and reduce your carbon footprint.',
+  image1: '/images/about-image-2.jpg',
+  image1Alt: 'Solar panel installation',
+  image2: '/images/about-image-1.jpg',
+  image2Alt: 'Solar panel installation',
+  stats: [
+    { value: 500, label: 'RESIDENTIAL HOMES', icon: 'plus' },
+    { value: 10, label: 'YEARS EXPERIENCE', icon: 'plus' },
+    { value: 98, label: 'CUSTOMER SATISFACTION', icon: 'percent' },
+    { formattedValue: '24/7', label: 'SUPPORT AVAILABLE' },
+  ],
+};
+
 export default function AboutUs() {
   const aboutTagRef = useRef<HTMLButtonElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -276,7 +295,7 @@ export default function AboutUs() {
               ref={aboutTagRef}
               className="mb-6 px-4 py-2 bg-[#DFFFEA]/50 text-black text-sm font-regular rounded-xs w-fit"
             >
-              ABOUT
+              {aboutUsContent.tag}
             </button>
 
             {/* Main Heading */}
@@ -284,14 +303,23 @@ export default function AboutUs() {
               ref={headingRef}
               className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tighter tracking-tight mb-4"
             >
-              Switch to <span style={{ color: '#09DFAB' }}>Solar</span> & Enjoy Energy Independence
+              {aboutUsContent.heading.split(aboutUsContent.headingHighlight).map((part, index, array) => 
+                index < array.length - 1 ? (
+                  <span key={index}>
+                    {part}
+                    <span style={{ color: '#09DFAB' }}>{aboutUsContent.headingHighlight}</span>
+                  </span>
+                ) : (
+                  <span key={index}>{part}</span>
+                )
+              )}
             </h2>
 
 
             {/* Buttons */}
             <div ref={buttonsRef} className="flex items-center gap-4">
               <Button variant="primary" showArrow>
-                START A PROJECT
+                {aboutUsContent.buttonText}
               </Button>
             </div>
           </div>
@@ -304,8 +332,8 @@ export default function AboutUs() {
             >
               <img 
                 ref={image1Ref}
-                src="/images/about-image-2.jpg" 
-                alt="Solar panel installation" 
+                src={aboutUsContent.image1} 
+                alt={aboutUsContent.image1Alt} 
                 className="w-full h-full object-cover"
               />
               {/* Gradient overlay */}
@@ -368,8 +396,8 @@ export default function AboutUs() {
             >
               <img 
                 ref={image2Ref}
-                src="/images/about-image-1.jpg" 
-                alt="Solar panel installation" 
+                src={aboutUsContent.image2} 
+                alt={aboutUsContent.image2Alt} 
                 className="w-full h-full object-cover"
               />
               {/* Gradient overlay */}
@@ -383,7 +411,7 @@ export default function AboutUs() {
               ref={paragraphRef}
               className="text-md md:text-md lg:text-md font-normal leading-normal tracking-tight text-black"
             >
-              <span className="pl-2">Reliable solar solutions that cut your bills and reduce your carbon footprint.</span> Reliable solar solutions that cut your bills and reduce your carbon footprint.
+              <span className="pl-2">{aboutUsContent.paragraph}</span>
             </p>
           </div>
 
@@ -392,10 +420,15 @@ export default function AboutUs() {
             ref={statsRef}
             className="bg-[#09DFAB] rounded-md col-span-12 mt-8 lg:mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
           >
-            <StatsAnimation value={500} label="RESIDENTIAL HOMES" icon={<FaPlus />} />
-            <StatsAnimation value={10} label="YEARS EXPERIENCE" icon={<FaPlus />} />
-            <StatsAnimation value={98} label="CUSTOMER SATISFACTION" icon={<FaPercent />} />
-            <StatsAnimation formattedValue="24/7" label="SUPPORT AVAILABLE" />
+            {aboutUsContent.stats.map((stat, index) => (
+              <StatsAnimation
+                key={index}
+                value={'value' in stat ? stat.value : undefined}
+                formattedValue={'formattedValue' in stat ? stat.formattedValue : undefined}
+                label={stat.label}
+                icon={stat.icon === 'plus' ? <FaPlus /> : stat.icon === 'percent' ? <FaPercent /> : undefined}
+              />
+            ))}
           </div>
         </div>
       </div>

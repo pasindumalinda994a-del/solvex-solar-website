@@ -7,6 +7,26 @@ import Button from './components/Button';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Content Configuration - Easy to customize
+const heroContent = {
+  heading: 'Switch to Solar & Enjoy Energy Independence',
+  headingHighlight: 'Solar',
+  paragraph: 'Reliable solar solutions that cut your bills and reduce your carbon footprint. Reliable solar solutions that cut your bills and reduce your carbon footprint.',
+  primaryButtonText: 'START A PROJECT',
+  secondaryButtonText: 'LEARN MORE',
+  image: '/images/hero-image.webp',
+  imageAlt: 'Hero',
+  trustedBy: {
+    text: 'Trusted by +500',
+    subtext: 'residential homes',
+    customers: [
+      { image: '/images/customer-1.jpeg', alt: 'Customer' },
+      { image: '/images/customer-2.jpeg', alt: 'Customer' },
+      { image: '/images/customer-3.jpeg', alt: 'Customer' },
+    ],
+  },
+};
+
 export default function Hero() {
   const heroContentRef = useRef<HTMLDivElement>(null);
   const heroImageRef = useRef<HTMLImageElement>(null);
@@ -78,8 +98,8 @@ export default function Hero() {
           <div className="col-span-12 rounded-md overflow-hidden h-[75vh] md:h-[80vh] lg:h-[85vh] relative">
             <img 
               ref={heroImageRef}
-              src="/images/hero-image.webp" 
-              alt="Hero" 
+              src={heroContent.image} 
+              alt={heroContent.imageAlt} 
               className="w-full h-full object-cover"
             />
             {/* Dark gradient overlay */}
@@ -90,19 +110,15 @@ export default function Hero() {
               className="absolute top-4 right-4 md:top-6 md:right-6 lg:top-8 lg:right-8 flex items-center gap-3 px-4 py-2 md:px-5 md:py-2.5"
             >
               <div className="flex items-center -space-x-3">
-                <div className="w-10 h-10 md:w-10 md:h-10 rounded-full border-2 border-white overflow-hidden bg-gray-300">
-                  <img src="/images/customer-1.jpeg" alt="Customer" className="w-full h-full object-cover" />
-                </div>
-                <div className="w-10 h-10 md:w-10 md:h-10 rounded-full border-2 border-white overflow-hidden bg-gray-300">
-                  <img src="/images/customer-2.jpeg" alt="Customer" className="w-full h-full object-cover" />
-                </div>
-                <div className="w-10 h-10 md:w-10 md:h-10 rounded-full border-2 border-white overflow-hidden bg-gray-300">
-                  <img src="/images/customer-3.jpeg" alt="Customer" className="w-full h-full object-cover" />
-                </div>
+                {heroContent.trustedBy.customers.map((customer, index) => (
+                  <div key={index} className="w-10 h-10 md:w-10 md:h-10 rounded-full border-2 border-white overflow-hidden bg-gray-300">
+                    <img src={customer.image} alt={customer.alt} className="w-full h-full object-cover" />
+                  </div>
+                ))}
               </div>
               <p className="text-white text-xs md:text-sm font-medium font-['Onest'] leading-normal tracking-tight">
-                <span className="pl-2">Trusted by +500</span><br />
-                residential homes
+                <span className="pl-2">{heroContent.trustedBy.text}</span><br />
+                {heroContent.trustedBy.subtext}
               </p>
             </div>
             {/* Hero Content */}
@@ -112,20 +128,29 @@ export default function Hero() {
                   ref={headingRef}
                   className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tighter tracking-tight mb-4 text-white"
                 >
-                  Switch to <span style={{ color: '#09DFAB' }}>Solar</span> & Enjoy Energy Independence
+                  {heroContent.heading.split(heroContent.headingHighlight).map((part, index, array) => 
+                    index < array.length - 1 ? (
+                      <span key={index}>
+                        {part}
+                        <span style={{ color: '#09DFAB' }}>{heroContent.headingHighlight}</span>
+                      </span>
+                    ) : (
+                      <span key={index}>{part}</span>
+                    )
+                  )}
                 </h1>
                 <p 
                   ref={paragraphRef}
                   className="text-md md:text-md lg:text-md font-normal leading-normal tracking-tight text-white/90 max-w-2xl mb-6 max-w-lg"
                 >
-                  <span className="pl-2">Reliable solar solutions that cut your bills and reduce your carbon footprint.</span> Reliable solar solutions that cut your bills and reduce your carbon footprint.
+                  <span className="pl-2">{heroContent.paragraph}</span>
                 </p>
                 <div ref={buttonsRef} className="flex items-center gap-4">
                   <Button variant="secondary">
-                    LEARN MORE
+                    {heroContent.secondaryButtonText}
                   </Button>
                   <Button variant="primary" showArrow>
-                    START A PROJECT
+                    {heroContent.primaryButtonText}
                   </Button>
                 </div>
               </div>

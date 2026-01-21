@@ -6,44 +6,54 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Content Configuration - Easy to customize
+const faqContent = {
+  tag: 'FAQ',
+  heading: 'Answers to Your Solar Questions',
+  headingHighlight: 'Solar',
+  image: '/images/about-image-2.jpg',
+  imageAlt: 'Solar FAQ background',
+  faqs: [
+    {
+      id: 1,
+      question: 'Why should I switch to solar energy?',
+      answer:
+        'Solar energy helps you reduce monthly electricity bills, protect yourself from rising utility rates, and lower your carbon footprint while increasing the value of your property.'
+    },
+    {
+      id: 2,
+      question: 'How long does a typical installation take?',
+      answer:
+        'For most residential projects, installation can be completed within 1–3 days once permits and approvals are in place. Larger commercial systems may take longer depending on size and complexity.'
+    },
+    {
+      id: 3,
+      question: 'Will solar panels work on cloudy days?',
+      answer:
+        'Yes. Solar panels still generate electricity on cloudy or rainy days, although at a reduced output. Your system is designed to perform efficiently across different weather conditions throughout the year.'
+    },
+    {
+      id: 4,
+      question: 'What kind of maintenance do solar panels require?',
+      answer:
+        'Solar systems require very little maintenance. Periodic cleaning and routine inspections are usually enough to keep your panels operating at peak efficiency.'
+    },
+    {
+      id: 5,
+      question: 'Is my roof suitable for solar panels?',
+      answer:
+        'Most roofs are compatible with solar, but we evaluate roof condition, orientation, shading, and available space to recommend the best solution for your home or business.'
+    }
+  ],
+};
+
 type FAQItem = {
   id: number;
   question: string;
   answer: string;
 };
 
-const faqs: FAQItem[] = [
-  {
-    id: 1,
-    question: 'Why should I switch to solar energy?',
-    answer:
-      'Solar energy helps you reduce monthly electricity bills, protect yourself from rising utility rates, and lower your carbon footprint while increasing the value of your property.'
-  },
-  {
-    id: 2,
-    question: 'How long does a typical installation take?',
-    answer:
-      'For most residential projects, installation can be completed within 1–3 days once permits and approvals are in place. Larger commercial systems may take longer depending on size and complexity.'
-  },
-  {
-    id: 3,
-    question: 'Will solar panels work on cloudy days?',
-    answer:
-      'Yes. Solar panels still generate electricity on cloudy or rainy days, although at a reduced output. Your system is designed to perform efficiently across different weather conditions throughout the year.'
-  },
-  {
-    id: 4,
-    question: 'What kind of maintenance do solar panels require?',
-    answer:
-      'Solar systems require very little maintenance. Periodic cleaning and routine inspections are usually enough to keep your panels operating at peak efficiency.'
-  },
-  {
-    id: 5,
-    question: 'Is my roof suitable for solar panels?',
-    answer:
-      'Most roofs are compatible with solar, but we evaluate roof condition, orientation, shading, and available space to recommend the best solution for your home or business.'
-  }
-];
+const faqs: FAQItem[] = faqContent.faqs;
 
 export default function FAQ() {
   const [activeId, setActiveId] = useState<number | null>(1);
@@ -458,10 +468,19 @@ export default function FAQ() {
         <div className="mb-8 lg:mb-10">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <button ref={tagRef} className="px-4 py-2 bg-[#DFFFEA]/50 text-black text-sm font-regular rounded-xs w-fit">
-              FAQ
+              {faqContent.tag}
             </button>
             <h2 ref={headingRef} className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tighter tracking-tight text-right">
-              Answers to Your <span style={{ color: '#09DFAB' }}>Solar</span> Questions
+              {faqContent.heading.split(faqContent.headingHighlight).map((part, index, array) => 
+                index < array.length - 1 ? (
+                  <span key={index}>
+                    {part}
+                    <span style={{ color: '#09DFAB' }}>{faqContent.headingHighlight}</span>
+                  </span>
+                ) : (
+                  <span key={index}>{part}</span>
+                )
+              )}
             </h2>
           </div>
         </div>
@@ -476,8 +495,8 @@ export default function FAQ() {
             >
               <img
                 ref={imageRef}
-                src="/images/about-image-2.jpg"
-                alt="Solar FAQ background"
+                src={faqContent.image}
+                alt={faqContent.imageAlt}
                 className="w-full h-full object-cover will-change-transform"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />

@@ -8,53 +8,63 @@ import ServiceCard from './components/ServiceCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Content Configuration - Easy to customize
+const servicesContent = {
+  tag: 'SERVICES',
+  heading: 'Switch to Solar & Enjoy Energy Independence',
+  headingHighlight: 'Solar',
+  paragraph: 'Reliable solar solutions that cut your bills and reduce your carbon footprint. Reliable solar solutions that cut your bills and reduce your carbon footprint.',
+  buttonText: 'START A PROJECT',
+  services: [
+    {
+      imageSrc: '/images/service-1.jpg',
+      imageAlt: 'Residential solar panel installation',
+      title: 'Residential Solar Installation',
+      description: 'Custom residential solar systems that maximize energy savings. Expert installation from assessment to completion.',
+      points: [
+        'Free site assessment and energy analysis',
+        'Professional installation with warranty coverage',
+        'Reduce electricity bills by up to 90%',
+      ],
+    },
+    {
+      imageSrc: '/images/service-2.jpg',
+      imageAlt: 'Commercial solar power plant',
+      title: 'Commercial Solar Solutions',
+      description: 'Scalable commercial solar solutions that reduce costs and boost sustainability. Turnkey systems tailored to your business needs.',
+      points: [
+        'Custom system design for your facility',
+        'Significant ROI with tax incentives available',
+        'Enhanced brand reputation and ESG compliance',
+      ],
+    },
+    {
+      imageSrc: '/images/service-3.jpg',
+      imageAlt: 'Energy storage systems',
+      title: 'Energy Storage Systems',
+      description: 'Advanced battery storage for uninterrupted power and energy independence. Seamlessly integrates with your solar system.',
+      points: [
+        'Backup power during grid outages',
+        'Store excess solar energy for later use',
+        'Long-lasting lithium-ion technology',
+      ],
+    },
+    {
+      imageSrc: '/images/service-4.jpg',
+      imageAlt: 'Solar panel maintenance and support',
+      title: 'Maintenance & Support',
+      description: 'Comprehensive maintenance and 24/7 monitoring to keep your system at peak performance. Protect your investment for years to come.',
+      points: [
+        '24/7 remote monitoring and alerts',
+        'Regular cleaning and performance checks',
+        'Priority support and rapid response',
+      ],
+    },
+  ],
+};
+
 // Service data
-const servicesData = [
-  {
-    imageSrc: '/images/service-1.jpg',
-    imageAlt: 'Residential solar panel installation',
-    title: 'Residential Solar Installation',
-    description: 'Custom residential solar systems that maximize energy savings. Expert installation from assessment to completion.',
-    points: [
-      'Free site assessment and energy analysis',
-      'Professional installation with warranty coverage',
-      'Reduce electricity bills by up to 90%',
-    ],
-  },
-  {
-    imageSrc: '/images/service-2.jpg',
-    imageAlt: 'Commercial solar power plant',
-    title: 'Commercial Solar Solutions',
-    description: 'Scalable commercial solar solutions that reduce costs and boost sustainability. Turnkey systems tailored to your business needs.',
-    points: [
-      'Custom system design for your facility',
-      'Significant ROI with tax incentives available',
-      'Enhanced brand reputation and ESG compliance',
-    ],
-  },
-  {
-    imageSrc: '/images/service-3.jpg',
-    imageAlt: 'Energy storage systems',
-    title: 'Energy Storage Systems',
-    description: 'Advanced battery storage for uninterrupted power and energy independence. Seamlessly integrates with your solar system.',
-    points: [
-      'Backup power during grid outages',
-      'Store excess solar energy for later use',
-      'Long-lasting lithium-ion technology',
-    ],
-  },
-  {
-    imageSrc: '/images/service-4.jpg',
-    imageAlt: 'Solar panel maintenance and support',
-    title: 'Maintenance & Support',
-    description: 'Comprehensive maintenance and 24/7 monitoring to keep your system at peak performance. Protect your investment for years to come.',
-    points: [
-      '24/7 remote monitoring and alerts',
-      'Regular cleaning and performance checks',
-      'Priority support and rapid response',
-    ],
-  },
-];
+const servicesData = servicesContent.services;
 
 export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -274,7 +284,7 @@ export default function Services() {
               ref={tagRef}
               className="mb-6 px-4 py-2 bg-[#DFFFEA]/50 text-black text-sm font-regular rounded-xs w-fit"
             >
-              SERVICES
+              {servicesContent.tag}
             </button>
 
             {/* Main Heading */}
@@ -282,7 +292,16 @@ export default function Services() {
               ref={headingRef}
               className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tighter tracking-tight mb-4"
             >
-              Switch to <span style={{ color: '#09DFAB' }}>Solar</span> & Enjoy Energy Independence
+              {servicesContent.heading.split(servicesContent.headingHighlight).map((part, index, array) => 
+                index < array.length - 1 ? (
+                  <span key={index}>
+                    {part}
+                    <span style={{ color: '#09DFAB' }}>{servicesContent.headingHighlight}</span>
+                  </span>
+                ) : (
+                  <span key={index}>{part}</span>
+                )
+              )}
             </h2>
 
             {/* Paragraph */}
@@ -290,13 +309,13 @@ export default function Services() {
               ref={paragraphRef}
               className="text-md md:text-md lg:text-md font-normal leading-normal tracking-tight text-black mb-6 max-w-lg"
             >
-              <span className="pl-2">Reliable solar solutions that cut your bills and reduce your carbon footprint.</span> Reliable solar solutions that cut your bills and reduce your carbon footprint.
+              <span className="pl-2">{servicesContent.paragraph}</span>
             </p>
 
             {/* Buttons */}
             <div ref={buttonsRef} className="flex items-center gap-4">
               <Button variant="primary" showArrow>
-                START A PROJECT
+                {servicesContent.buttonText}
               </Button>
             </div>
           </div>

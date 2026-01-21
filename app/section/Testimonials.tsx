@@ -9,53 +9,80 @@ import Button from './components/Button';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: 'Sarah Johnson',
-    role: 'Homeowner',
-    company: 'Residential Customer',
-    image: '/images/customer-1.jpeg',
-    rating: 5,
-    text: 'Switching to solar with Solvex Solar was the best decision we made. Our energy bills have dropped significantly, and the installation process was smooth and professional. Highly recommend!'
+// Content Configuration - Easy to customize
+const testimonialsContent = {
+  tag: 'TESTIMONIALS',
+  heading: 'What Our Customers Say',
+  headingHighlight: 'Customers',
+  paragraph: 'Hear from satisfied customers who have made the switch to solar energy with Solvex Solar.',
+  rating: {
+    value: 4.9,
+    maxValue: 5,
+    reviewCount: 280,
   },
-  {
-    id: 2,
-    name: 'Michael Chen',
-    role: 'Business Owner',
-    company: 'Commercial Client',
-    image: '/images/customer-2.jpeg',
-    rating: 5,
-    text: 'The team at Solvex Solar exceeded our expectations. They provided excellent service from consultation to installation, and we\'re already seeing great savings on our monthly energy costs.'
+  achievements: [
+    { text: '56+ solar installations delivered' },
+    { text: '100% safe installations with certified professionals' },
+    { text: '5+ years of solar energy experience' },
+  ],
+  cta: {
+    heading: "Ready to plan your own journey?",
+    subheading: "Let's get started!",
+    buttonText: 'START A PROJECT',
   },
-  {
-    id: 3,
-    name: 'Emily Rodriguez',
-    role: 'Property Manager',
-    company: 'Commercial Client',
-    image: '/images/customer-3.jpeg',
-    rating: 5,
-    text: 'Outstanding service and quality workmanship. The solar panels look great and are performing even better than expected. Our tenants love the green energy initiative!'
-  },
-  {
-    id: 4,
-    name: 'David Thompson',
-    role: 'Homeowner',
-    company: 'Residential Customer',
-    image: '/images/customer-1.jpeg',
-    rating: 5,
-    text: 'Professional team, excellent communication throughout the process, and fantastic results. Our energy independence journey started with Solvex Solar!'
-  },
-  {
-    id: 5,
-    name: 'Lisa Anderson',
-    role: 'Business Owner',
-    company: 'Commercial Client',
-    image: '/images/customer-2.jpeg',
-    rating: 5,
-    text: 'The ROI on our solar investment has been incredible. Solvex Solar made the entire process seamless from start to finish. Highly recommended for any business!'
-  },
-];
+  quote: '"The best investment we made for our future."',
+  image: '/images/testimonial.jpg',
+  imageAlt: 'Solar panel installation testimonial',
+  testimonials: [
+    {
+      id: 1,
+      name: 'Sarah Johnson',
+      role: 'Homeowner',
+      company: 'Residential Customer',
+      image: '/images/customer-1.jpeg',
+      rating: 5,
+      text: 'Switching to solar with Solvex Solar was the best decision we made. Our energy bills have dropped significantly, and the installation process was smooth and professional. Highly recommend!'
+    },
+    {
+      id: 2,
+      name: 'Michael Chen',
+      role: 'Business Owner',
+      company: 'Commercial Client',
+      image: '/images/customer-2.jpeg',
+      rating: 5,
+      text: 'The team at Solvex Solar exceeded our expectations. They provided excellent service from consultation to installation, and we\'re already seeing great savings on our monthly energy costs.'
+    },
+    {
+      id: 3,
+      name: 'Emily Rodriguez',
+      role: 'Property Manager',
+      company: 'Commercial Client',
+      image: '/images/customer-3.jpeg',
+      rating: 5,
+      text: 'Outstanding service and quality workmanship. The solar panels look great and are performing even better than expected. Our tenants love the green energy initiative!'
+    },
+    {
+      id: 4,
+      name: 'David Thompson',
+      role: 'Homeowner',
+      company: 'Residential Customer',
+      image: '/images/customer-1.jpeg',
+      rating: 5,
+      text: 'Professional team, excellent communication throughout the process, and fantastic results. Our energy independence journey started with Solvex Solar!'
+    },
+    {
+      id: 5,
+      name: 'Lisa Anderson',
+      role: 'Business Owner',
+      company: 'Commercial Client',
+      image: '/images/customer-2.jpeg',
+      rating: 5,
+      text: 'The ROI on our solar investment has been incredible. Solvex Solar made the entire process seamless from start to finish. Highly recommended for any business!'
+    },
+  ],
+};
+
+const testimonials: Testimonial[] = testimonialsContent.testimonials;
 
 export default function Testimonials() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -195,13 +222,22 @@ export default function Testimonials() {
                   ref={tagRef}
                   className="mb-4 md:mb-6 px-4 py-2 bg-[#DFFFEA]/50 text-black text-sm font-regular rounded-xs w-fit"
                 >
-                  TESTIMONIALS
+                  {testimonialsContent.tag}
                 </button>
                 <h2 
                   ref={headingRef}
                   className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tighter tracking-tight text-left"
                 >
-                  What Our <span style={{ color: '#09DFAB' }}>Customers</span> Say
+                  {testimonialsContent.heading.split(testimonialsContent.headingHighlight).map((part, index, array) => 
+                    index < array.length - 1 ? (
+                      <span key={index}>
+                        {part}
+                        <span style={{ color: '#09DFAB' }}>{testimonialsContent.headingHighlight}</span>
+                      </span>
+                    ) : (
+                      <span key={index}>{part}</span>
+                    )
+                  )}
                 </h2>
               </div>
               {/* Right side - Paragraph */}
@@ -210,7 +246,7 @@ export default function Testimonials() {
                   ref={paragraphRef}
                   className="text-md md:text-md lg:text-md font-normal leading-normal tracking-tight text-black/80 max-w-lg text-justify"
                 >
-                  <span className="pl-2">Hear from satisfied customers who have made the switch to solar energy with Solvex Solar.</span>
+                  <span className="pl-2">{testimonialsContent.paragraph}</span>
                 </p>
               </div>
             </div>
@@ -223,53 +259,30 @@ export default function Testimonials() {
               <div className="flex flex-col">
                 {/* Rating Display */}
                 <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-4xl md:text-5xl font-bold leading-none">4.9</span>
-                  <span className="text-lg md:text-xl font-normal text-black/60">/5</span>
+                  <span className="text-4xl md:text-5xl font-bold leading-none">{testimonialsContent.rating.value}</span>
+                  <span className="text-lg md:text-xl font-normal text-black/60">/{testimonialsContent.rating.maxValue}</span>
                 </div>
                 
                 {/* Rating Context */}
                 <p className="text-md md:text-md lg:text-md font-normal leading-normal tracking-tight text-black/80 mb-6">
-                  Based on <strong>280+</strong> verified customer reviews
+                  Based on <strong>{testimonialsContent.rating.reviewCount}+</strong> verified customer reviews
                 </p>
 
                 {/* Achievements List */}
                 <div className="flex flex-col gap-4">
-                  {/* Achievement 1 */}
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 flex-shrink-0 mt-0.5">
-                      <svg className="w-full h-full text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
+                  {testimonialsContent.achievements.map((achievement, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <div className="w-5 h-5 flex-shrink-0 mt-0.5">
+                        <svg className="w-full h-full text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                      </div>
+                      <p className="text-md md:text-md lg:text-md font-normal leading-normal tracking-tight text-black/80">
+                        {achievement.text}
+                      </p>
                     </div>
-                    <p className="text-md md:text-md lg:text-md font-normal leading-normal tracking-tight text-black/80">
-                      56+ solar installations delivered
-                    </p>
-                  </div>
-
-                  {/* Achievement 2 */}
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 flex-shrink-0 mt-0.5">
-                      <svg className="w-full h-full text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                      </svg>
-                    </div>
-                    <p className="text-md md:text-md lg:text-md font-normal leading-normal tracking-tight text-black/80">
-                      100% safe installations with certified professionals
-                    </p>
-                  </div>
-
-                  {/* Achievement 3 */}
-                  <div className="flex items-start gap-3">
-                    <div className="w-5 h-5 flex-shrink-0 mt-0.5">
-                      <svg className="w-full h-full text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                    </div>
-                    <p className="text-md md:text-md lg:text-md font-normal leading-normal tracking-tight text-black/80">
-                      5+ years of solar energy experience
-                    </p>
-                  </div>
+                  ))}
                 </div>
               </div>
 
@@ -279,16 +292,16 @@ export default function Testimonials() {
               {/* Section 3: Bottom Section - CTA */}
               <div className="flex flex-col">
                 <p className="text-md md:text-md lg:text-md font-normal leading-normal tracking-tight text-black mb-2">
-                  Ready to plan your own journey?
+                  {testimonialsContent.cta.heading}
                 </p>
                 <p className="text-md md:text-md lg:text-md font-normal leading-normal tracking-tight text-black mb-6">
-                  Let's get started!
+                  {testimonialsContent.cta.subheading}
                 </p>
                 
                 {/* Button */}
                 <div className="flex items-center">
                   <Button variant="primary" showArrow={true}>
-                    START A PROJECT
+                    {testimonialsContent.cta.buttonText}
                   </Button>
                 </div>
               </div>
@@ -309,13 +322,13 @@ export default function Testimonials() {
                   </svg>
                 </div>
                 <p className="text-white text-lg md:text-xl lg:text-lg font-medium leading-relaxed italic">
-                  "The best investment we made for our future."
+                  {testimonialsContent.quote}
                 </p>
               </div>
               <img 
                 ref={imageRef}
-                src="/images/testimonial.jpg" 
-                alt="Solar panel installation testimonial" 
+                src={testimonialsContent.image} 
+                alt={testimonialsContent.imageAlt} 
                 className="w-full h-full object-cover"
               />
               {/* Gradient overlay */}

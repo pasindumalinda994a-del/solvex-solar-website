@@ -501,19 +501,31 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function CompanyLogo() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const logoContainerRef = useRef<HTMLDivElement>(null);
-
-  // Logo data formatted for LogoLoop component
-  const companyLogos: LogoItem[] = [
+// Content Configuration - Easy to customize
+const companyLogoContent = {
+  logos: [
     { src: "/next.svg", alt: "Company 1" },
     { src: "/next.svg", alt: "Company 2" },
     { src: "/next.svg", alt: "Company 3" },
     { src: "/next.svg", alt: "Company 4" },
     { src: "/next.svg", alt: "Company 5" },
     { src: "/next.svg", alt: "Company 6" },
-  ];
+  ],
+  speed: 80,
+  logoHeight: 40,
+  gap: 48,
+  ariaLabel: "Company logos",
+};
+
+export default function CompanyLogo() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const logoContainerRef = useRef<HTMLDivElement>(null);
+
+  // Logo data formatted for LogoLoop component
+  const companyLogos: LogoItem[] = companyLogoContent.logos.map(logo => ({
+    src: logo.src,
+    alt: logo.alt,
+  }));
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -557,13 +569,13 @@ export default function CompanyLogo() {
           <div ref={logoContainerRef} className="col-span-12">
             <LogoLoop
               logos={companyLogos}
-              speed={80}
+              speed={companyLogoContent.speed}
               direction="left"
-              logoHeight={40}
-              gap={48}
+              logoHeight={companyLogoContent.logoHeight}
+              gap={companyLogoContent.gap}
               fadeOut={true}
               pauseOnHover={true}
-              ariaLabel="Company logos"
+              ariaLabel={companyLogoContent.ariaLabel}
               className="grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-opacity duration-200"
             />
           </div>

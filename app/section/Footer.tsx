@@ -1,5 +1,36 @@
 import AnimatedNavLink from "./components/AnimatedNavLink";
 
+// Content Configuration - Easy to customize
+const footerContent = {
+  companyName: 'Solvex',
+  description: 'Discover AlUla through journeys that stay in your stories that live beyond the desert.',
+  backgroundImage: '/images/hero-image.webp',
+  backgroundImageAlt: 'Desert landscape',
+  navigation: {
+    title: 'Navigation',
+    links: [
+      { href: '/', label: 'Home' },
+      { href: '/services', label: 'Services' },
+      { href: '/about', label: 'About' },
+      { href: '/blog', label: 'Blog' },
+    ],
+  },
+  social: {
+    title: 'Social',
+    links: [
+      { href: '#tiktok', label: 'Tiktok' },
+      { href: '#instagram', label: 'Instagram' },
+      { href: '#threads', label: 'Threads' },
+      { href: '#linkedin', label: 'LinkedIn' },
+    ],
+  },
+  copyright: '© 2025 Solvex. All rights reserved.',
+  legalLinks: [
+    { href: '#privacy', label: 'Privacy Policy' },
+    { href: '#terms', label: 'Terms' },
+  ],
+};
+
 export default function Footer() {
   return (
     <footer className="w-full py-8 md:py-12 lg:py-16">
@@ -11,8 +42,8 @@ export default function Footer() {
           <div className="col-span-12 relative overflow-hidden rounded-3xl md:rounded-lg h-[260px] md:h-[320px] lg:h-[360px]">
             {/* Background image */}
             <img
-              src="/images/hero-image.webp"
-              alt="Desert landscape"
+              src={footerContent.backgroundImage}
+              alt={footerContent.backgroundImageAlt}
               className="absolute inset-0 h-full w-full object-cover"
             />
 
@@ -25,12 +56,11 @@ export default function Footer() {
             <div className="col-span-12 md:col-span-6 flex flex-col justify-center">
               <div>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight mb-4">
-                  Solvex
+                  {footerContent.companyName}
                 </h2>
               </div>
               <p className="max-w-md text-xs md:text-sm lg:text-base leading-relaxed text-white/85 mt-2 md:mt-3 lg:mt-4">
-                Discover AlUla through journeys that stay in your stories that
-                live beyond the desert.
+                {footerContent.description}
               </p>
             </div>
 
@@ -40,58 +70,32 @@ export default function Footer() {
                 {/* Navigation */}
                 <div className="space-y-3">
                   <p className="text-xs md:text-sm text-white/70 tracking-tight">
-                    Navigation
+                    {footerContent.navigation.title}
                   </p>
                   <ul className="space-y-1.5 text-sm md:text-base">
-                    <li>
-                      <AnimatedNavLink href="/" className="text-white/70 hover:text-white transition-colors">
-                        Home
-                      </AnimatedNavLink>
-                    </li>
-                    <li>
-                      <AnimatedNavLink href="/services" className="text-white/70 hover:text-white transition-colors">
-                        Services
-                      </AnimatedNavLink>
-                    </li>
-                    <li>
-                      <AnimatedNavLink href="/about" className="text-white/70 hover:text-white transition-colors">
-                        About
-                      </AnimatedNavLink>
-                    </li>
-                    <li>
-                      <AnimatedNavLink href="/blog" className="text-white/70 hover:text-white transition-colors">
-                        Blog
-                      </AnimatedNavLink>
-                    </li>
+                    {footerContent.navigation.links.map((link, index) => (
+                      <li key={index}>
+                        <AnimatedNavLink href={link.href} className="text-white/70 hover:text-white transition-colors">
+                          {link.label}
+                        </AnimatedNavLink>
+                      </li>
+                    ))}
                   </ul>
                 </div>
 
                 {/* Social */}
                 <div className="space-y-3">
                   <p className="text-xs md:text-sm text-white/70 tracking-tight">
-                    Social
+                    {footerContent.social.title}
                   </p>
                   <ul className="space-y-1.5 text-sm md:text-base">
-                    <li>
-                      <AnimatedNavLink href="#tiktok" className="text-white/70 hover:text-white transition-colors">
-                        Tiktok
-                      </AnimatedNavLink>
-                    </li>
-                    <li>
-                      <AnimatedNavLink href="#instagram" className="text-white/70 hover:text-white transition-colors">
-                        Instagram
-                      </AnimatedNavLink>
-                    </li>
-                    <li>
-                      <AnimatedNavLink href="#threads" className="text-white/70 hover:text-white transition-colors">
-                        Threads
-                      </AnimatedNavLink>
-                    </li>
-                    <li>
-                      <AnimatedNavLink href="#linkedin" className="text-white/70 hover:text-white transition-colors">
-                        LinkedIn
-                      </AnimatedNavLink>
-                    </li>
+                    {footerContent.social.links.map((link, index) => (
+                      <li key={index}>
+                        <AnimatedNavLink href={link.href} className="text-white/70 hover:text-white transition-colors">
+                          {link.label}
+                        </AnimatedNavLink>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -103,16 +107,15 @@ export default function Footer() {
         <div className="col-span-12 mt-4 flex flex-col gap-3 pt-4 text-xs md:text-sm text-black">
           <div className="flex w-full flex-col gap-3 items-start justify-between md:flex-row md:items-center">
             <p className="tracking-tight">
-              © 2025 Solvex. All rights reserved.
+              {footerContent.copyright}
             </p>
 
             <div className="flex items-center gap-6 ml-auto">
-              <a href="#privacy" className="hover:underline">
-                Privacy Policy
-              </a>
-              <a href="#terms" className="hover:underline">
-                Terms
-              </a>
+              {footerContent.legalLinks.map((link, index) => (
+                <a key={index} href={link.href} className="hover:underline">
+                  {link.label}
+                </a>
+              ))}
             </div>
           </div>
         </div>
